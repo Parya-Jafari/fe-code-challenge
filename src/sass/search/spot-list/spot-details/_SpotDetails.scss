@@ -1,0 +1,53 @@
+.SpotDetails-container {
+    background-color: $color-white;
+    position: absolute;
+    top: 50%;
+    right: 20%;
+    left: 20%;
+    transform: translateY(-50%);
+    width: 60%;
+    max-width: 60%;
+    max-height: 70%;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.SpotDetails-header {
+    display: flex;
+    flex-direction: row-reverse;
+    padding: 0;
+}
+
+.SpotDetails-action {
+    cursor: pointer;
+    background: none;
+    border: none;
+    font-size: xx-large;
+    padding: 0 10px;
+}
+
+.SpotDetails-title {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+    position: relative;
+    top: -10px;
+}
+
+.SpotDetails-body {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 50px 10px 40px;
+    align-items: flex-start;
+    justify-content: flex-start;
+
+    p {
+        margin-bottom: 25px;
+    }
+
+    .Button {
+        align-self: center;
+        margin-top: auto;
+    }
+}
