@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Button from '../../../common/Button';
+import Button from '../../common/Button';
 
-const SpotDetails = ({selectedSpot, setSelectedSpot}) => {
+const SpotDetails = ({selectedSpot, setSelectedSpot, onClickBook}) => {
     return (
         <div className="SpotDetails-container">
             <div className="SpotDetails-header">
@@ -27,8 +27,9 @@ const SpotDetails = ({selectedSpot, setSelectedSpot}) => {
                     color="primary"
                     type="submit"
                     block={false}
+                    onClick={onClickBook}
                 >
-                    {`$${(selectedSpot.price / 100).toFixed(2)} | Book now!`}
+                    ${(selectedSpot.price / 100).toFixed(2)} | Book now!
                 </Button>
             </div>
         </div>
@@ -38,6 +39,7 @@ const SpotDetails = ({selectedSpot, setSelectedSpot}) => {
 SpotDetails.propTypes = {
     selectedSpot: PropTypes.object,
     setSelectedSpot: PropTypes.func.isRequired,
+    onClickBook: PropTypes.func.isRequired,
 };
 
 export default SpotDetails;

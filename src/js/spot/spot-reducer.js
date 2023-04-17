@@ -1,7 +1,7 @@
-import {SPOT_UPDATE_SELECTED} from './spot-actions';
+import {SPOT_UPDATE_SELECTED, SPOT_PURCHASE} from './spot-actions';
 
 const initialState = {
-    selected: null
+    selected: null,
 };
 
 export default function spot(state = initialState, {type, payload}) {
@@ -10,6 +10,13 @@ export default function spot(state = initialState, {type, payload}) {
             return {
                 ...state,
                 selected: payload || null
+            };
+        }
+        // TODO: is this where we make the request to update the BE?
+        case SPOT_PURCHASE: {
+            return {
+                ...state,
+                selected: null
             };
         }
 

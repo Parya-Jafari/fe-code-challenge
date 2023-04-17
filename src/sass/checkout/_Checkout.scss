@@ -1,3 +1,119 @@
 .Checkout {
-    // Checkout styles
+    width: 35%;
+    margin: 40px auto;
+    border: 1px solid $color-dashboard;
+    border-radius: 8px;
+    background-color: $color-white;
+    max-height: 90vh;
+
+    h4 {
+        background-color: $color-shift;
+        color: $color-white;
+        border-radius: 8px 8px 0 0;
+        line-height: 3em;
+        padding-left: 25px;
+        margin: 0;
+    }
+
+    span {
+        cursor: pointer;
+    }
+}
+
+.Checkout-form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px 25px;
+
+    %label {
+        padding: 5px 0;
+        color: $color-cement;
+        font-weight: 600;
+    }
+
+    label {
+        @extend %label;
+    }
+
+    .label-check {
+        @extend %label;
+    }
+
+    %input {
+        width: 100%;
+        line-height: 2.5em;
+        margin-bottom: 10px;
+        border: 1px solid $color-dashboard;
+        border-radius: 5px;
+        outline: none;
+        &:focus {
+            outline: none;
+            border: 1px solid $color-go;
+        }
+    }
+
+    input {
+        @extend %input;
+        &:not(:focus) {
+            &:not(:placeholder-shown) {
+                &:invalid {
+                    border-color: $color-stop;
+                    + .error-email {
+                        display: flex;
+                    }
+                    + .error-tel {
+                        display: flex;
+                    }
+                }
+            }
+        }
+    }
+
+    .input-error {
+        @extend %input;
+        &:not(:focus) {
+            &:invalid {
+                border-color: $color-stop;
+                + .error-email {
+                    display: flex;
+                }
+                + .error-tel {
+                    display: flex;
+                }
+            }
+        }
+    }
+
+    fieldset {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        &:invalid {
+            > .label-check {
+                color: $color-stop;
+            }
+        }
+    }
+
+    %error-message {
+        font-size: smaller;
+        display: none;
+        color: $color-stop;
+        margin-top: -5px;
+        margin-bottom: 10px;
+    }
+    .error-email {
+        @extend %error-message;
+    }
+
+    .error-tel {
+        @extend %error-message;
+        margin-bottom: 25px;
+    }
+
+    .Button {
+        align-self: flex-end;
+        margin-top: auto;
+    }
 }

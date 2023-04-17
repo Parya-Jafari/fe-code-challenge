@@ -4,6 +4,7 @@ import {ConnectedRouter} from 'connected-react-router';
 import axios from 'axios';
 import createStore, {getHistory} from './store/store';
 import App from './App';
+import {PersistGate} from 'redux-persist/integration/react';
 
 export default class Root extends Component {
     state = {
@@ -36,19 +37,30 @@ export default class Root extends Component {
             spots
         } = this.state;
 
-        if (isLoading) {
+        const Loading = () => {
             return (
                 <div className="Root-loader">
                     Loading...
                 </div>
             );
+        };
+
+        if (isLoading) {
+            return <Loading />;
         }
+
+        const {store, persistor} = createStore();
 
         return (
             <div className="Root">
-                <Provider store={createStore()}>
+                <Provider store={store}>
                     <ConnectedRouter history={getHistory()}>
-                        <App spots={spots} />
+                        <PersistGate
+                            loading={<Loading />}
+                            persistor={persistor}
+                        >
+                            <App spots={spots} />
+                        </PersistGate>
                     </ConnectedRouter>
                 </Provider>
             </div>

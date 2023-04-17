@@ -2,14 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {updateSelected} from '../spot/spot-actions';
-import SpotDetails from './spot-list/spot-details/SpotDetails';
+import SpotDetails from '../spot/spot-details/SpotDetails';
 import SpotList from './spot-list/SpotList';
 import {useTransition, animated} from 'react-spring';
+import {push} from 'connected-react-router';
 
 const Search = ({
     selectedSpot,
     spots,
-    setSpot
+    setSpot,
+    pushTo,
 }) => {
     const transition = useTransition(selectedSpot, {
         from: {opacity: 0},
@@ -36,6 +38,7 @@ const Search = ({
                                 <SpotDetails
                                     selectedSpot={item}
                                     setSelectedSpot={setSpot}
+                                    onClickBook={() => pushTo('/checkout')}
                                 /> : <></>
                             }
                         </animated.div>
@@ -51,6 +54,7 @@ Search.propTypes = {
     selectedSpot: PropTypes.object,
     spots: PropTypes.arrayOf(PropTypes.object).isRequired,
     setSpot: PropTypes.func.isRequired,
+    pushTo: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => {
@@ -66,7 +70,8 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = {
-    setSpot: updateSelected
+    setSpot: updateSelected,
+    pushTo: push,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Search);
