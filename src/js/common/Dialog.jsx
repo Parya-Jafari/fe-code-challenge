@@ -99,7 +99,7 @@ export const AnimatedDialog = ({open, onClose, animationConfig, header, children
                     <animated.div style={style} data-testid={testId}>
                         {state ?
                             <Dialog
-                                open={state}
+                                open={Boolean(state)}
                                 onClose={onClose}
                                 header={header}
                                 className={className}
@@ -116,7 +116,9 @@ export const AnimatedDialog = ({open, onClose, animationConfig, header, children
 };
 
 AnimatedDialog.propTypes = {
-    open: PropTypes.bool.isRequired,
+    open: PropTypes.oneOfType([
+        PropTypes.bool,
+        PropTypes.object]).isRequired,
     onClose: PropTypes.func.isRequired,
     animationConfig: PropTypes.object,
     children: PropTypes.func,

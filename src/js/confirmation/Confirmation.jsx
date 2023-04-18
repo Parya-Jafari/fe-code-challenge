@@ -2,6 +2,7 @@ import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {push} from 'connected-react-router';
+import {updateSelected} from '../spot/spot-actions';
 import Button from '../common/Button';
 import Image from '../common/Image';
 
@@ -9,7 +10,8 @@ class Confirmation extends PureComponent {
     static propTypes = {
         email: PropTypes.string.isRequired,
         selectedSpot: PropTypes.object,
-        pushTo: PropTypes.func.isRequired
+        pushTo: PropTypes.func.isRequired,
+        setSelectedSpot: PropTypes.func.isRequired
     };
 
     constructor(props) {
@@ -29,8 +31,10 @@ class Confirmation extends PureComponent {
     _onPurchaseAnotherClick = evt => {
         const {
             pushTo,
+            setSelectedSpot,
         } = this.props;
 
+        setSelectedSpot(null);
         pushTo('/');
     };
 
@@ -79,6 +83,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = {
     pushTo: push,
+    setSelectedSpot: updateSelected,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Confirmation);
