@@ -135,7 +135,8 @@
 
     &:not([disabled]) {
         &:hover {
-            // For the sake of this excersice. Ideally we want to add a new color: color-go-hover in _defaults.scss and in BrandUtils.
+            // For the sake of this excersice, using the color-accelerate for hover state.
+            // Ideally we  add a new color: color-go-hover in _defaults.scss and in BrandUtils.
             background-color: $color-accelerate;
             border-color: $color-accelerate;
         }
