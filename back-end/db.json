@@ -81,20 +81,5 @@
       "image": "https://res.cloudinary.com/spothero/image/upload/v1579704582/front-end/code-challenge/iy9iobjbtmrix01hp2yw.jpg"
     }
   ],
-  "reservations": [
-    {
-      "spotId": 10,
-      "email": "wef@gerg",
-      "phone": "23232323",
-      "lastName": "fwef",
-      "id": 1
-    },
-    {
-      "spotId": 1,
-      "email": "2rewr@efw",
-      "phone": "(223) 323-2332",
-      "lastName": "e323r",
-      "id": 2
-    }
-  ]
+  "reservations": []
 }

@@ -108,8 +108,7 @@ export const AnimatedDialog = ({open, onClose, animationConfig, header, children
                             </Dialog> : <></>
                         }
                     </animated.div>
-                )
-                )
+                ))
             }
         </>
     );
