@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Button from '../../common/Button';
 import {AnimatedDialog, DialogContentBody, DialogContentTitle, DialogFooterAction} from '../../common/Dialog';
 
-const SpotDetails = ({selectedSpot, setSelectedSpot, onClickBook}) => {
+const SpotDetailsModal = ({selectedSpot, setSelectedSpot, onClickBook}) => {
     return (
         <AnimatedDialog
             open={selectedSpot}
@@ -37,10 +37,10 @@ const SpotDetails = ({selectedSpot, setSelectedSpot, onClickBook}) => {
     );
 };
 
-SpotDetails.propTypes = {
+SpotDetailsModal.propTypes = {
     selectedSpot: PropTypes.object,
     setSelectedSpot: PropTypes.func.isRequired,
     onClickBook: PropTypes.func.isRequired,
 };
 
-export default SpotDetails;
+export default SpotDetailsModal;

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {updateSelected} from '../spot/spot-actions';
-import SpotDetails from './spot-details/SpotDetails';
+import SpotDetailsModal from './spot-details/SpotDetailsModal';
 import SpotList from './spot-list/SpotList';
 import {push} from 'connected-react-router';
 
@@ -20,7 +20,7 @@ const Search = ({
                 setSpot={setSpot}
             />
             <div className="Search-content">
-                <SpotDetails
+                <SpotDetailsModal
                     selectedSpot={selectedSpot}
                     setSelectedSpot={setSpot}
                     onClickBook={() => pushTo('/checkout')}

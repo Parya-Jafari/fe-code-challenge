@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import {useTransition, animated} from 'react-spring';
 
-export const DialogContentTitle = ({title, className}) => {
+export const DialogContentTitle = ({title, className, testId}) => {
     const titleClasses = classNames('Dialog__content-title', className);
 
     return (
-        <div className={titleClasses}>
+        <div className={titleClasses} data-testid={testId}>
             <h1>
                 {title}
             </h1>
@@ -18,13 +18,14 @@ export const DialogContentTitle = ({title, className}) => {
 DialogContentTitle.propTypes = {
     title: PropTypes.node,
     className: PropTypes.string,
+    testId: PropTypes.string,
 };
 
-export const DialogContentBody = ({children, className}) => {
+export const DialogContentBody = ({children, className, testId}) => {
     const bodyClasses = classNames('Dialog__content-body', className);
 
     return (
-        <div className={bodyClasses}>
+        <div className={bodyClasses} data-testid={testId}>
             {children}
         </div>
     );
@@ -33,13 +34,14 @@ export const DialogContentBody = ({children, className}) => {
 DialogContentBody.propTypes = {
     children: PropTypes.node,
     className: PropTypes.string,
+    testId: PropTypes.string,
 };
 
-export const DialogFooterAction = ({children, className}) => {
+export const DialogFooterAction = ({children, className, testId}) => {
     const footerClasses = classNames('Dialog__footer-action', className);
 
     return (
-        <div className={footerClasses}>
+        <div className={footerClasses} data-testid={testId}>
             {children}
         </div>
     );
@@ -48,13 +50,14 @@ export const DialogFooterAction = ({children, className}) => {
 DialogFooterAction.propTypes = {
     children: PropTypes.node,
     className: PropTypes.string,
+    testId: PropTypes.string,
 };
 
-export const Dialog = ({open, onClose, header, children, className}) => {
+export const Dialog = ({open, onClose, header, children, className, testId}) => {
     const dialogClasses = classNames('Dialog', className);
 
     return (
-        <div className={dialogClasses}>
+        <div className={dialogClasses} data-testid={testId}>
             <div className="Dialog__header">
                 <button
                     className="Dialog__header-action"
@@ -77,9 +80,10 @@ Dialog.propTypes = {
     children: PropTypes.node,
     header: PropTypes.node,
     className: PropTypes.string,
+    testId: PropTypes.string,
 };
 
-export const AnimatedDialog = ({open, onClose, animationConfig, header, children, className}) => {
+export const AnimatedDialog = ({open, onClose, animationConfig, header, children, className, testId}) => {
     const transition = useTransition(open, {
         from: {opacity: 0},
         enter: {opacity: 1},
@@ -92,7 +96,7 @@ export const AnimatedDialog = ({open, onClose, animationConfig, header, children
         <>
             {
                 transition((style, state) => (
-                    <animated.div style={style}>
+                    <animated.div style={style} data-testid={testId}>
                         {state ?
                             <Dialog
                                 open={state}
@@ -100,7 +104,7 @@ export const AnimatedDialog = ({open, onClose, animationConfig, header, children
                                 header={header}
                                 className={className}
                             >
-                                {children(state, onClose)}
+                                {children ? children(state, onClose) : ''}
                             </Dialog> : <></>
                         }
                     </animated.div>
@@ -115,7 +119,8 @@ AnimatedDialog.propTypes = {
     open: PropTypes.bool.isRequired,
     onClose: PropTypes.func.isRequired,
     animationConfig: PropTypes.object,
-    children: PropTypes.node,
+    children: PropTypes.func,
     header: PropTypes.node,
     className: PropTypes.string,
+    testId: PropTypes.string
 };
