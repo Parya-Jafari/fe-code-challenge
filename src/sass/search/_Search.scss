@@ -2,7 +2,7 @@
 $spot-list-width: 460px;
 
 @import "spot-list/SpotList";
-@import "spot-list/spot-details/SpotDetails";
+@import "spot-details/SpotDetails";
 
 .Search {
     width: 100%;
@@ -12,8 +12,9 @@ $spot-list-width: 460px;
     position: absolute;
 
     // Decision was made to deviate from design color in favor of
-    // keeping colors semantic. Adding a new color to the palette just
-    // for this one component does not seem wise.
+    // keeping the semantic structure of colors. Avoided adding a new color to the palette
+    // just to be used as the background for the search dialog (as a semantic one was not
+    // provided in the design).
     background-color: color.scale($color-fuel, $lightness: 5%);
     top: 0;
     left: $spot-list-width;
