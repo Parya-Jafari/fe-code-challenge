@@ -1,4 +1,4 @@
-import React, {useCallback, useState, useRef, useEffect} from 'react';
+import React, {useCallback, useState, useRef, useEffect, useMemo} from 'react';
 import SpotItem from '../spot/SpotItem';
 import {push} from 'connected-react-router';
 import {connect} from 'react-redux';
@@ -8,10 +8,14 @@ import {updateEmail} from '../checkout/checkout-actions';
 import axios from 'axios';
 
 const Checkout = ({spot, pushTo, setCheckoutEmail}) => {
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
-    const [email, setEmail] = useState('');
-    const [tel, setTel] = useState('');
+    const [reservationData, setReservationData] = useState({
+        firstName: '',
+        lastName: '',
+        email: '',
+        tel: ''
+    });
+
+    const {firstName, lastName, email, tel} = useMemo(() => reservationData, [reservationData]);
     const emailRef = useRef();
     const telRef = useRef();
     const [checkEmailError, setCheckEmailError] = useState(false);
@@ -76,11 +80,9 @@ const Checkout = ({spot, pushTo, setCheckoutEmail}) => {
         setShouldValidate(false);
     };
 
-    // TODO: Margin at the bottom add an empty div maybe
-
     const onInputBlur = (event, setShouldValidate) => {
         event.target.className = 'input';
-        if (event.target.value) { // TODO: empty string vs " " both are false so what happens here
+        if (event.target.value) {
             setShouldValidate(true);
         } else {
             setShouldValidate(false);
@@ -97,9 +99,9 @@ const Checkout = ({spot, pushTo, setCheckoutEmail}) => {
         if (matched) {
             const formatted = `(${matched[1]}) ${matched[2]}-${matched[3]}`;
     
-            setTel(formatted);
+            setReservationData(prev => ({...prev, tel: formatted}));
         } else {
-            setTel(formattedInput);
+            setReservationData(prev => ({...prev, tel: formattedInput}));
         }
     };
 
@@ -127,7 +129,7 @@ const Checkout = ({spot, pushTo, setCheckoutEmail}) => {
                     name="first-name"
                     id="first-name"
                     value={firstName}
-                    onChange={e => setFirstName(e.target.value)}
+                    onChange={e => setReservationData(prev => ({...prev, firstName: e.target.data}))}
                 />
                 <label htmlFor="last-name">
                     Last Name
@@ -137,7 +139,7 @@ const Checkout = ({spot, pushTo, setCheckoutEmail}) => {
                     name="last-name"
                     id="last-name"
                     value={lastName}
-                    onChange={e => setLastName(e.target.value)}
+                    onChange={e => setReservationData(prev => ({...prev, lastName: e.target.value}))}
                 />
                 <fieldset
                     id="email-field"
@@ -156,7 +158,7 @@ const Checkout = ({spot, pushTo, setCheckoutEmail}) => {
                         placeholder=" "
                         onFocus={() => onInputFocus(setCheckEmailError)}
                         onBlur={e => onInputBlur(e, setCheckEmailError)}
-                        onChange={e => setEmail(e.target.value)}
+                        onChange={e => setReservationData(prev => ({...prev, email: e.target.value}))}
                         ref={emailRef}
                         value={email}
                     />

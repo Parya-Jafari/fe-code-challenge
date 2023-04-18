@@ -12,7 +12,7 @@ export default function spot(state = initialState, {type, payload}) {
                 selected: payload || null
             };
         }
-        // TODO: is this where we make the request to update the BE?
+
         case SPOT_PURCHASE: {
             return {
                 ...state,
